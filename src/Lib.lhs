@@ -7,7 +7,7 @@
 
 ## はじめに
 
-この記事では，Haskellにおいて，どのように値を構築するかに関して考察します．
+この記事では，Haskellにおいて，どのように手段で利用者に値を構築させるかについて考察します．
 
 ## ライセンス
 
@@ -18,6 +18,11 @@
 記事中のコードが常に意図するように動作することを確認するために，これらはGitHub Actions上で毎日最新のGHCやCabal，Stackを用いてコンパイル，実行されています．詳しくは[.github/workflows/ci.yml](.github/workflows/ci.yml)や[Actionの実行結果](https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/actions)を確認してください．
 
 使用しているStackのレゾルバやライブラリのバージョンなどは[stack.yaml](stack.yaml)や[package.yaml](package.yaml)を確認してください．
+
+## 値を構築する様々な方法
+
+### 型の内部構造を公開する
+
 
 ```haskell
 module Lib

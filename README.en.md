@@ -25,10 +25,10 @@
 ## Introduction
 
 <!--
-この記事では，Haskellにおいて，どのように値を構築するかに関して考察します．
+この記事では，Haskellにおいて，どのように手段で利用者に値を構築させるかについて考察します．
 -->
 
-This article discusses how to construct values in Haskell.
+This article discusses how to let users construct values in Haskell.
 
 <!--
 ## ライセンス
@@ -59,3 +59,15 @@ The code in this article is compiled and executed daily on GitHub Actions using 
 -->
 
 Check [stack.yaml](stack.yaml) and [package.yaml](package.yaml) for the Stack resolver and library versions used.
+
+<!--
+## 値を構築する様々な方法
+-->
+
+## Different ways to construct values
+
+<!--
+### 型の内部構造を公開する
+-->
+
+### Expose the internal structure of a type
