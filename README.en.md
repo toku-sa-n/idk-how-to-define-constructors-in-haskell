@@ -30,4 +30,14 @@
 
 This article discusses how to construct values in Haskell.
 
-##
+<!--
+## ライセンス
+-->
+
+## License
+
+<!--
+本文は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)の下で利用可能です．またソースコードは[WTFPL](LICENSE-WTFPL)の下で利用可能です．
+-->
+
+The text is available under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Source code is available under [WTFPL](LICENSE-WTFPL).
