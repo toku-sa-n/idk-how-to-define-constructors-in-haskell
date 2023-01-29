@@ -62,6 +62,7 @@ jobs:
         run: echo "$HOME/.cabal/bin" >> $GITHUB_PATH
 
       - name: Run tests with Cabal
+        run: cabal test
 
       - name: Run tests with Stack
         run: stack test
