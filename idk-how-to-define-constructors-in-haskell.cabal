@@ -1,0 +1,48 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.35.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           idk-how-to-define-constructors-in-haskell
+version:        0.1.0.0
+synopsis:       The document describing several ways to define constructors in Haskell
+description:    Please see the README on GitHub at <https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell#readme>
+homepage:       https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell#readme
+bug-reports:    https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/issues
+author:         Hiroki Tokunaga
+maintainer:     tokusan441@gmail.com
+copyright:      2023 Hiroki Tokunaga
+license:        BSD3
+build-type:     Simple
+
+source-repository head
+  type: git
+  location: https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_idk_how_to_define_constructors_in_haskell
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -pgmL markdown-unlit
+  build-depends:
+      base >=4.7 && <5
+    , hspec
+  default-language: Haskell2010
+
+test-suite idk-how-to-define-constructors-in-haskell
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_idk_how_to_define_constructors_in_haskell
+  hs-source-dirs:
+      test
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -pgmL markdown-unlit -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , hspec
+    , idk-how-to-define-constructors-in-haskell
+  default-language: Haskell2010
