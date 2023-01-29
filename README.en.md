@@ -41,3 +41,21 @@ This article discusses how to construct values in Haskell.
 -->
 
 The text is available under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Source code is available under [WTFPL](LICENSE-WTFPL).
+
+<!--
+## バージョン情報
+-->
+
+## Version information
+
+<!--
+記事中のコードが常に意図するように動作することを確認するために，これらはGitHub Actions上で毎日最新のGHCやCabal，Stackを用いてコンパイル，実行されています．詳しくは[.github/workflows/ci.yml](.github/workflows/ci.yml)や[Actionの実行結果](https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/actions)を確認してください．
+-->
+
+The code in this article is compiled and executed daily on GitHub Actions using the latest GHC, Cabal, and Stack to ensure that it always works as intended. Please check [.github/workflows/ci.yml](.github/workflows/ci.yml) and [results of Actions](https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/actions) for details.
+
+<!--
+使用しているStackのレゾルバやライブラリのバージョンなどは[stack.yaml](stack.yaml)や[package.yaml](package.yaml)を確認してください．
+-->
+
+Check [stack.yaml](stack.yaml) and [package.yaml](package.yaml) for the Stack resolver and library versions used.
