@@ -1,5 +1,6 @@
 import           Test.Hspec
+import Lib
 
 main :: IO ()
 main =
-  hspec $ pure ()
+  hspec testInvalidPersonIsNothing
