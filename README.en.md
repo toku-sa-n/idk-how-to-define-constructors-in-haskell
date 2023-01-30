@@ -49,10 +49,10 @@ The text is available under [CC BY-SA 4.0](https://creativecommons.org/licenses/
 ## Version information
 
 <!--
-記事中のコードが常に意図するように動作することを確認するために，これらはGitHub Actions上で毎日最新のGHCやCabal，Stackを用いてコンパイル，実行されています．詳しくは[.github/workflows/ci.yml](.github/workflows/ci.yml)や[Actionの実行結果](https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/actions)を確認してください．
+記事中のコードが常に意図するように動作することを確認するために，これらはGitHub Actions上で毎日最新のGHCやCabal，Stackを用いてコンパイル，実行されています．したがって，GHCやCabal，Stackのバージョンに関しては[Actionの実行結果](https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/actions)を，CIの詳細に関しては[.github/workflows/ci.yml](.github/workflows/ci.yml)を確認してください．
 -->
 
-The code in this article is compiled and executed daily on GitHub Actions using the latest GHC, Cabal, and Stack to ensure that it always works as intended. Please check [.github/workflows/ci.yml](.github/workflows/ci.yml) and [results of Actions](https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/actions) for details.
+The code in the article is compiled and executed daily on GitHub Actions using the latest GHC, Cabal, and Stack to ensure that it always works as intended. Therefore, please refer to [the results of Actions](https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/actions) for the versions of GHC, Cabal, and Stack, and to [.github/workflows/ci.yml](https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/actions) for the details of the CI.
 
 <!--
 使用しているStackのレゾルバやライブラリのバージョンなどは[stack.yaml](stack.yaml)や[package.yaml](package.yaml)を確認してください．
