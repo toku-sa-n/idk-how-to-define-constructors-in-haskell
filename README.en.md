@@ -352,3 +352,15 @@ testLeftNegativeAge =
     it "returns a `Left NegativeAge` if a negative age is passed." $
     mkPerson'' "Tom" (-3) `shouldBe` Left NegativeAge
 ```
+
+<!--
+#### 欠点
+-->
+
+#### Disadvantages
+
+<!--
+- コンストラクタ関数の引数が増えるとコードが読みづらくなる．
+-->
+
+- As the number of parameters of a constructor function increases, the code becomes more difficult to read.

@@ -138,3 +138,7 @@ testLeftNegativeAge =
     it "負の年齢を渡すと`Left NegativeAge`を返す．" $
     mkPerson'' "Tom" (-3) `shouldBe` Left NegativeAge
 ```
+
+#### 欠点
+
+- コンストラクタ関数の引数が増えるとコードが読みづらくなる．
