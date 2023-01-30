@@ -271,11 +271,11 @@ testInvalidPersonIsNothing =
 
 <!--
 - データ構造の中身を公開する必要がないため，構造を変更しても他のコードを同様に変更したり，ライブラリのバージョンを上げる必要がない．（ただしコンストラクタ関数の意味やシグネチャを変更したら当然それらを行う必要はある）
-- 無効なデータが生成されることを防ぐことができる．場合によっては`error`を呼び出して直ちにプログラムを終了させたり，エラー型を用いてエラーを呼び出し側に通知することもできる．
+- 無効なデータが生成されることを防ぐことができる．場合によっては`error`を呼び出して直ちにプログラムを終了させることができる．
 -->
 
 - Since the contents of the data structure do not need to be exposed, changing the structure does not require changing other code as well or increasing the version of the library. (However, if the semantics or signatures of the constructor functions are changed, it is of course necessary to do so.)
-- It can prevent the generation of invalid data. Depending on the situation, the program can be terminated immediately by calling `error`, or it can notify the caller of an error by using an error type.
+- It can prevent the generation of invalid data. Depending on the situation, the program can be terminated immediately by calling `error`.
 
 <!--
 ```haskell
@@ -306,6 +306,12 @@ testPanicOnEmptyName =
     it "raises an error with the error message \"An empty name is passed.\"." $
     evaluate (mkPerson' "" 1) `shouldThrow` errorCall "An empty name is passed."
 ```
+
+<!--
+あるいは，エラー型を用いてエラーを呼び出し側に通知することもできる．
+-->
+
+Alternatively, it can notify the caller of an error by using an error type.
 
 <!--
 ```haskell
