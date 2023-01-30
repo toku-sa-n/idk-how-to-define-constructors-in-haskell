@@ -9,6 +9,10 @@
 
 この記事では，Haskellにおいて，どのように手段で利用者に値を構築させるかについて考察します．
 
+## このファイルについて
+
+このファイルは，[markdown-unlit](https://github.com/sol/markdown-unlit)を用いた一つの`.lhs`ファイルです．したがって，すべてのHaskellコードブロックは連結しており，あるコードブロック内で定義されている関数や有効になっているプラグマは，すべてのコードブロック内で利用可能，または有効になっています．
+
 ## ライセンス
 
 本文は[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)の下で利用可能です．またソースコードは[WTFPL](LICENSE-WTFPL)の下で利用可能です．
@@ -21,11 +25,31 @@
 
 ## 値を構築する様々な方法
 
-### 型の内部構造を公開する
-
-
 ```haskell
 module Lib
-  (
-  ) where
+    (
+    ) where
 ```
+
+### 型の内部構造を公開する
+
+#### 概要
+
+型の内部構造を，エクスポート一覧で`Foo(..)`などとしてモジュール外に公開します．
+
+#### コード例
+
+```haskell
+data Person = Person
+    { name :: String
+    , age :: Int
+    }
+
+lomias :: Person
+lomias = Person {name = "ロミアス", age = 24}
+```
+
+#### 利点
+
+- 一番コード量が少ない．
+- コードがわかりやすい．

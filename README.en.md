@@ -31,6 +31,18 @@
 This article discusses how to let users construct values in Haskell.
 
 <!--
+## このファイルについて
+-->
+
+## About this file
+
+<!--
+このファイルは，[markdown-unlit](https://github.com/sol/markdown-unlit)を用いた一つの`.lhs`ファイルです．したがって，すべてのHaskellコードブロックは連結しており，あるコードブロック内で定義されている関数や有効になっているプラグマは，すべてのコードブロック内で利用可能，または有効になっています．
+-->
+
+This is a single `.lhs` file using [markdown-unlit](https://github.com/sol/markdown-unlit). Thus, all Haskell code blocks are linked, and functions defined or pragmas enabled in one code block are available or enabled in all code blocks.
+
+<!--
 ## ライセンス
 -->
 
@@ -71,3 +83,57 @@ Check [stack.yaml](stack.yaml) and [package.yaml](package.yaml) for the Stack re
 -->
 
 ### Expose the internal structure of a type
+
+<!--
+#### 概要
+-->
+
+#### Overview
+
+<!--
+型の内部構造を，エクスポート一覧で`Foo(..)`などとしてモジュール外に公開します．
+-->
+
+Expose the internal structure of the type in the export list as `Foo(...) ` etc.
+
+<!--
+#### コード例
+-->
+
+#### Code example
+
+<!--
+```haskell
+data Person = Person
+    { name :: String
+    , age :: Int
+    }
+
+lomias :: Person
+lomias = Person {name = "ロミアス", age = 24}
+```
+-->
+
+```haskell
+data Person = Person
+    { name :: String
+    , age :: Int
+    }
+
+lomias :: Person
+lomias = Person {name = "Lomias", age = 24}
+```
+
+<!--
+#### 利点
+-->
+
+#### Advantages
+
+<!--
+- 一番コード量が少ない．
+- コードがわかりやすい．
+-->
+
+- The least amount of code.
+- The code is easy to understand.
