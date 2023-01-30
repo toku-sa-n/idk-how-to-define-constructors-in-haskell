@@ -38,7 +38,7 @@ This article discusses how to let users construct values in Haskell.
 このファイルは，[markdown-unlit](https://github.com/sol/markdown-unlit)を用いた一つの`.lhs`ファイルです．したがって，すべてのHaskellコードブロックは連結しており，あるコードブロック内で定義されている関数や有効になっているプラグマは，すべてのコードブロック内で利用可能，または有効になっています．
 -->
 
-This is a single `.lhs` file using [markdown-unlit](https://github.com/sol/markdown-unlit). Thus, all Haskell code blocks are linked, and functions defined or pragmas enabled in one code block are available or enabled in all code blocks.
+[`README.md`] is a `.lhs` file using [markdown-unlit](https://github.com/sol/markdown-unlit). Thus, all Haskell code blocks are linked, and functions defined or pragmas enabled in one code block are available or enabled in all code blocks.
 
 <!--
 ## ライセンス
@@ -78,16 +78,24 @@ Check [stack.yaml](stack.yaml) and [package.yaml](package.yaml) for the Stack re
 
 <!--
 ```haskell
+{-# LANGUAGE RecordWildCards #-}
+
 module Lib
     ( testInvalidPersonIsNothing
     ) where
+
+import Test.Hspec
 ```
 -->
 
 ```haskell
+{-# LANGUAGE RecordWildCards #-}
+
 module Lib
     ( testInvalidPersonIsNothing
     ) where
+
+import Test.Hspec
 ```
 
 <!--
@@ -119,7 +127,7 @@ Expose the internal structure of the type in the export list as `Foo(...) ` etc.
 data Person = Person
     { name :: String
     , age :: Int
-    }
+    } deriving (Eq, Show)
 
 lomias :: Person
 lomias = Person {name = "ロミアス", age = 24}
@@ -130,7 +138,7 @@ lomias = Person {name = "ロミアス", age = 24}
 data Person = Person
     { name :: String
     , age :: Int
-    }
+    } deriving (Eq, Show)
 
 lomias :: Person
 lomias = Person {name = "Lomias", age = 24}

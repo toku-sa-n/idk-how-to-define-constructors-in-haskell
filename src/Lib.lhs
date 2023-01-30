@@ -1,4 +1,4 @@
- # Haskellでのコンストラクタの定義の方法が分からない
+# Haskellでのコンストラクタの定義の方法が分からない
 
 [![CI status](https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/actions/workflows/ci.yml)
 
@@ -95,3 +95,7 @@ testInvalidPersonIsNothing =
     describe "invalidPerson'" $
     it "`Nothing`を返す" $ invalidPerson' `shouldBe` Nothing
 ```
+
+#### 利点
+
+-
