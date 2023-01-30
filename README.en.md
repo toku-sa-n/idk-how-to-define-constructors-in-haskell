@@ -81,14 +81,14 @@ Check [stack.yaml](stack.yaml) and [package.yaml](package.yaml) for the Stack re
 <!--
 ```haskell
 module Lib
-    (
+    ( testInvalidPersonIsNothing
     ) where
 ```
 -->
 
 ```haskell
 module Lib
-    (
+    ( testInvalidPersonIsNothing
     ) where
 ```
 
@@ -186,3 +186,67 @@ invalidPerson = Person {name = "", age = -1}
 -->
 
 - Exporting selector function overwhelms the namespace. However, it doesn't really matter because of [`NoFieldSelector`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/field_selectors.html), [`RecordWildCards`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/record_wildcards.html), and [`OverloadedRecordDot`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/overloaded_record_dot.html). Also refer to the presentation "Haskell is now a different language――RecordDotSyntax and NoFieldSelectors](https://youtu.be/haZl-q6mfyk?t=2581)". (In Japanese).
+
+<!--
+### [スマートコンストラクタ](https://wiki.haskell.org/Smart_constructors)を定義する
+-->
+
+### Define [smart constructor](https://wiki.haskell.org/Smart_constructors)
+
+<!--
+#### 概要
+-->
+
+#### Overview
+
+<!--
+データ構造は公開せず，代わりに引数を基に値を生成する関数を定義します．
+-->
+
+The data structure is not exposed; instead, define a function that generates a value based on the arguments.
+
+<!--
+Haskellではそのような関数を定義する際，[`mk`という接頭辞をつけることが一般的](https://kowainik.github.io/posts/naming-conventions)のようです．
+-->
+
+In Haskell, it is common to [add the prefix `mk`](https://kowainik.github.io/posts/naming-conventions) when defining such a function.
+
+<!--
+#### コード例
+-->
+
+#### Code example
+
+<!--
+```haskell
+mkPerson :: String -> Int -> Maybe Person
+mkPerson name age
+    | null name = Nothing
+    | age < 0 = Nothing
+    | otherwise = Just Person {..}
+
+invalidPerson' :: Maybe Person
+invalidPerson' = mkPerson "" (-1)
+
+testInvalidPersonIsNothing :: Spec
+testInvalidPersonIsNothing =
+    describe "invalidPerson'" $
+    it "`Nothing`を返す" $ invalidPerson' `shouldBe` Nothing
+```
+-->
+
+```haskell
+mkPerson :: String -> Int -> Maybe Person
+mkPerson name age
+    | null name = Nothing
+    | age < 0 = Nothing
+    | otherwise = Just Person {..}
+
+invalidPerson' :: Maybe Person
+invalidPerson' = mkPerson "" (-1)
+
+testInvalidPersonIsNothing :: Spec
+testInvalidPersonIsNothing =
+    describe "invalidPerson'" $
+    it "returns a `Nothing" $ invalidPerson' `shouldBe` Nothing
+```

@@ -1,4 +1,4 @@
-# Haskellでのコンストラクタの定義の方法が分からない
+ # Haskellでのコンストラクタの定義の方法が分からない
 
 [![CI status](https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/toku-sa-n/idk-how-to-define-constructors-in-haskell/actions/workflows/ci.yml)
 [![クリエイティブ・コモンズ　ライセンス　BY-SA](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)
@@ -26,9 +26,13 @@
 ## 値を構築する様々な方法
 
 ```haskell
+{-# LANGUAGE RecordWildCards #-}
+
 module Lib
-    (
+    ( testInvalidPersonIsNothing
     ) where
+
+import Test.Hspec
 ```
 
 ### 型の内部構造を公開する
@@ -43,7 +47,7 @@ module Lib
 data Person = Person
     { name :: String
     , age :: Int
-    }
+    } deriving (Eq, Show)
 
 lomias :: Person
 lomias = Person {name = "ロミアス", age = 24}
@@ -66,3 +70,29 @@ invalidPerson = Person {name = "", age = -1}
 ```
 
 - セレクタ関数をエクスポートすることで，名前空間を圧迫する．ただしこの問題は，[`NoFieldSelector`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/field_selectors.html)や[`RecordWildCards`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/record_wildcards.html)，[`OverloadedRecordDot`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/overloaded_record_dot.html)を用いると，そこまで問題ではなくなる．Haskell Day 2021のfumieval氏の発表「[Haskell は別言語になりました――RecordDotSyntax と NoFieldSelectors](https://youtu.be/haZl-q6mfyk?t=2581)」も参考．
+
+### [スマートコンストラクタ](https://wiki.haskell.org/Smart_constructors)を定義する
+
+#### 概要
+
+データ構造は公開せず，代わりに引数を基に値を生成する関数を定義します．
+
+Haskellではそのような関数を定義する際，[`mk`という接頭辞をつけることが一般的](https://kowainik.github.io/posts/naming-conventions)のようです．
+
+#### コード例
+
+```haskell
+mkPerson :: String -> Int -> Maybe Person
+mkPerson name age
+    | null name = Nothing
+    | age < 0 = Nothing
+    | otherwise = Just Person {..}
+
+invalidPerson' :: Maybe Person
+invalidPerson' = mkPerson "" (-1)
+
+testInvalidPersonIsNothing :: Spec
+testInvalidPersonIsNothing =
+    describe "invalidPerson'" $
+    it "`Nothing`を返す" $ invalidPerson' `shouldBe` Nothing
+```
