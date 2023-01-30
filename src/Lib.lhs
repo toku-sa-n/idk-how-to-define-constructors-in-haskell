@@ -116,7 +116,9 @@ testPanicOnEmptyName =
     describe "mkPerson'" $
     it "空の名前を渡すと「空の名前が渡されました．」というエラー文を表示してプログラムが終了する" $
     evaluate (mkPerson' "" 1) `shouldThrow` errorCall "空の名前が渡されました．"
+```
 
+```haskell
 data PersonError
     = EmptyName
     | NegativeAge

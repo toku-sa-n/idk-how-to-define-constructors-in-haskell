@@ -290,7 +290,25 @@ testPanicOnEmptyName =
     describe "mkPerson'" $
     it "空の名前を渡すと「空の名前が渡されました．」というエラー文を表示してプログラムが終了する" $
     evaluate (mkPerson' "" 1) `shouldThrow` errorCall "空の名前が渡されました．"
+```
+-->
 
+```haskell
+mkPerson' :: String -> Int -> Person
+mkPerson' name age
+    | null name = error "An empty name is passed."
+    | age < 0 = error "The age is empty."
+    | otherwise = Person {..}
+
+testPanicOnEmptyName :: Spec
+testPanicOnEmptyName =
+    describe "mkPerson'" $
+    it "raises an error with the error message \"An empty name is passed.\"." $
+    evaluate (mkPerson' "" 1) `shouldThrow` errorCall "An empty name is passed."
+```
+
+<!--
+```haskell
 data PersonError
     = EmptyName
     | NegativeAge
@@ -311,18 +329,6 @@ testLeftNegativeAge =
 -->
 
 ```haskell
-mkPerson' :: String -> Int -> Person
-mkPerson' name age
-    | null name = error "An empty name is passed."
-    | age < 0 = error "The age is empty."
-    | otherwise = Person {..}
-
-testPanicOnEmptyName :: Spec
-testPanicOnEmptyName =
-    describe "mkPerson'" $
-    it "raises an error with the error message \"An empty name is passed.\"." $
-    evaluate (mkPerson' "" 1) `shouldThrow` errorCall "An empty name is passed."
-
 data PersonError
     = EmptyName
     | NegativeAge
