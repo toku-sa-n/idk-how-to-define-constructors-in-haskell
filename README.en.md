@@ -397,3 +397,105 @@ testMkLongevity =
 -->
 
 - As the number of parameters of a constructor function increases, the code becomes more difficult to read.
+
+<!--
+### Builderパターンを用いる
+-->
+
+### Using the Builder Pattern
+
+<!--
+#### 概要
+-->
+
+#### Overview
+
+<!--
+値を構築するための別の型を定義し，関数を用いて最終的な値を構築します．
+-->
+
+Define another type to construct the value and use functions to construct the final value.
+
+<!--
+#### コード例
+-->
+
+#### Code example
+
+<!--
+```haskell
+data PersonBuilder = PersonBuilder
+    { name :: Maybe String
+    , age  :: Maybe Int
+    }
+
+mkPersonBuilder :: PersonBuilder
+mkPersonBuilder = PersonBuilder {name = Nothing, age = Nothing}
+
+-- 2023/01/30現在，PersonBuilder{..}をbuilderとして，Right builder {name = x}と
+-- するとエラーが出る．
+-- 詳細はhttps://github.com/ghc-proposals/ghc-proposals/blob/master/proposals/0366-no-ambiguous-field-access.rstを確認．
+setName :: String -> PersonBuilder -> Either PersonError PersonBuilder
+setName x PersonBuilder {..}
+    | null x = Left EmptyName
+    | otherwise = Right PersonBuilder {name = Just x, ..}
+
+setAge :: Int -> PersonBuilder -> Either PersonError PersonBuilder
+setAge x PersonBuilder {..}
+    | x < 0 = Left NegativeAge
+    | otherwise = Right PersonBuilder {age = Just x, ..}
+
+mkPerson''' :: PersonBuilder -> Person
+mkPerson''' PersonBuilder {name = Just name, age = Just age} = Person {..}
+mkPerson''' _ = error "一部の値が正しく設定されていません"
+
+larnneire :: Either PersonError Person
+larnneire =
+    fmap mkPerson''' $ Right mkPersonBuilder >>= setName "ラーネイレ" >>= setAge 22
+
+testLarnneire :: Spec
+testLarnneire =
+    describe "larnneire" $
+    it "`Right`値を返す" $ larnneire `shouldBe` Right Person {name = "ラーネイレ", age = 22}
+```
+-->
+
+```haskell
+data PersonBuilder = PersonBuilder
+    { name :: Maybe String
+    , age  :: Maybe Int
+    }
+
+mkPersonBuilder :: PersonBuilder
+mkPersonBuilder = PersonBuilder {name = Nothing, age = Nothing}
+
+-- As of January 30, 2023, an error occurs when replacing `PersonBuilder {..}` with `builder`
+-- and writing `Right builder {name = x}`.
+-- See
+-- https://github.com/ghc-proposals/ghc-proposals/blob/master/proposals/0366-no-ambiguous-field-access.rst
+-- for the detail.
+setName :: String -> PersonBuilder -> Either PersonError PersonBuilder
+setName x PersonBuilder {..}
+    | null x = Left EmptyName
+    | otherwise = Right PersonBuilder {name = Just x, ..}
+
+setAge :: Int -> PersonBuilder -> Either PersonError PersonBuilder
+setAge x PersonBuilder {..}
+    | x < 0 = Left NegativeAge
+    | otherwise = Right PersonBuilder {age = Just x, ..}
+
+mkPerson''' :: PersonBuilder -> Person
+mkPerson''' PersonBuilder {name = Just name, age = Just age} = Person {..}
+mkPerson''' _ = error "Some values are not set correctly."
+
+larnneire :: Either PersonError Person
+larnneire =
+    fmap mkPerson''' $
+    Right mkPersonBuilder >>= setName "Larnneire" >>= setAge 22
+
+testLarnneire :: Spec
+testLarnneire =
+    describe "larnneire" $
+    it "returns a `Right` value." $
+    larnneire `shouldBe` Right Person {name = "Larnneire", age = 22}
+```

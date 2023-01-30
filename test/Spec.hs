@@ -8,3 +8,4 @@ main =
         testPanicOnEmptyName
         testLeftNegativeAge
         testMkLongevity
+        testLarnneire
