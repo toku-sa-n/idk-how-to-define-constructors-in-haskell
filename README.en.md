@@ -84,6 +84,7 @@ module Lib
     ( testInvalidPersonIsNothing
     , testPanicOnEmptyName
     , testLeftNegativeAge
+    , testMkLongevity
     ) where
 
 import           Control.Exception
@@ -98,6 +99,7 @@ module Lib
     ( testInvalidPersonIsNothing
     , testPanicOnEmptyName
     , testLeftNegativeAge
+    , testMkLongevity
     ) where
 
 import           Control.Exception
