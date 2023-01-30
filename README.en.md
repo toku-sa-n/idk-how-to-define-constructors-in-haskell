@@ -82,9 +82,12 @@ Check [stack.yaml](stack.yaml) and [package.yaml](package.yaml) for the Stack re
 
 module Lib
     ( testInvalidPersonIsNothing
+    , testPanicOnEmptyName
+    , testLeftNegativeAge
     ) where
 
-import Test.Hspec
+import           Control.Exception
+import           Test.Hspec
 ```
 -->
 
@@ -93,9 +96,12 @@ import Test.Hspec
 
 module Lib
     ( testInvalidPersonIsNothing
+    , testPanicOnEmptyName
+    , testLeftNegativeAge
     ) where
 
-import Test.Hspec
+import           Control.Exception
+import           Test.Hspec
 ```
 
 <!--
