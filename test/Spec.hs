@@ -7,3 +7,4 @@ main =
         testInvalidPersonIsNothing
         testPanicOnEmptyName
         testLeftNegativeAge
+        testMkLongevity

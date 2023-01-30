@@ -354,6 +354,37 @@ testLeftNegativeAge =
 ```
 
 <!--
+- 状況に応じて複数のコンストラクタ関数を定義できる．
+-->
+
+- Multiple constructor functions can be defined depending on the situation.
+
+<!--
+```haskell
+mkLongevity :: String -> Either PersonError Person
+mkLongevity name = mkPerson'' name 100
+
+testMkLongevity :: Spec
+testMkLongevity =
+    describe "mkLongevity" $
+    it "年齢が100歳の`Person`を生成する．" $
+    mkLongevity "Tom" `shouldBe` Right Person {name = "Tom", age = 100}
+```
+-->
+
+
+```haskell
+mkLongevity :: String -> Either PersonError Person
+mkLongevity name = mkPerson'' name 100
+
+testMkLongevity :: Spec
+testMkLongevity =
+    describe "mkLongevity" $
+    it "creates a `Person` whose age is 100 years old." $
+    mkLongevity "Tom" `shouldBe` Right Person {name = "Tom", age = 100}
+```
+
+<!--
 #### 欠点
 -->
 

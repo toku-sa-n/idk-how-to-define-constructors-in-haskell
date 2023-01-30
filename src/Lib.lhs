@@ -31,6 +31,7 @@ module Lib
     ( testInvalidPersonIsNothing
     , testPanicOnEmptyName
     , testLeftNegativeAge
+    , testMkLongevity
     ) where
 
 import           Control.Exception
@@ -137,6 +138,19 @@ testLeftNegativeAge =
     describe "mkPerson''" $
     it "負の年齢を渡すと`Left NegativeAge`を返す．" $
     mkPerson'' "Tom" (-3) `shouldBe` Left NegativeAge
+```
+
+- 状況に応じて複数のコンストラクタ関数を定義できる．
+
+```haskell
+mkLongevity :: String -> Either PersonError Person
+mkLongevity name = mkPerson'' name 100
+
+testMkLongevity :: Spec
+testMkLongevity =
+    describe "mkLongevity" $
+    it "年齢が100歳の`Person`を生成する．" $
+    mkLongevity "Tom" `shouldBe` Right Person {name = "Tom", age = 100}
 ```
 
 #### 欠点
