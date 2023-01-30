@@ -78,13 +78,16 @@ Check [stack.yaml](stack.yaml) and [package.yaml](package.yaml) for the Stack re
 
 <!--
 ```haskell
-{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE NoFieldSelectors      #-}
+{-# LANGUAGE RecordWildCards       #-}
 
 module Lib
     ( testInvalidPersonIsNothing
     , testPanicOnEmptyName
     , testLeftNegativeAge
     , testMkLongevity
+    , testLarnneire
     ) where
 
 import           Control.Exception
@@ -93,13 +96,16 @@ import           Test.Hspec
 -->
 
 ```haskell
-{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE NoFieldSelectors      #-}
+{-# LANGUAGE RecordWildCards       #-}
 
 module Lib
     ( testInvalidPersonIsNothing
     , testPanicOnEmptyName
     , testLeftNegativeAge
     , testMkLongevity
+    , testLarnneire
     ) where
 
 import           Control.Exception
