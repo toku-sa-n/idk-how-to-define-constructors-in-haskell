@@ -79,6 +79,20 @@ Check [stack.yaml](stack.yaml) and [package.yaml](package.yaml) for the Stack re
 ## Different ways to construct values
 
 <!--
+```haskell
+module Lib
+    (
+    ) where
+```
+-->
+
+```haskell
+module Lib
+    (
+    ) where
+```
+
+<!--
 ### 型の内部構造を公開する
 -->
 
@@ -137,3 +151,38 @@ lomias = Person {name = "Lomias", age = 24}
 
 - The least amount of code.
 - The code is easy to understand.
+
+<!--
+#### 欠点
+-->
+
+#### Disadvantages
+
+
+<!--
+- データ構造を変更すると，そのデータ構造を使用しているすべてのコードを変更する必要がある．
+- データ構造をライブラリとして公開している場合，データ構造の変更は破壊的変更となり，バージョンを上げる必要がある．
+- 妥当ではない値も生成できてしまう．
+-->
+
+- Changing a data structure requires changing all code that uses that structure.
+- If a data structure is published as a library, changing the structure is a breaking change and requires a version upgrade.
+- It is also possible to generate invalid values.
+
+<!--
+```haskell
+invalidPerson :: Person
+invalidPerson = Person {name = "", age = -1}
+```
+-->
+
+```haskell
+invalidPerson :: Person
+invalidPerson = Person {name = "", age = -1}
+```
+
+<!--
+- セレクタ関数をエクスポートすることで，名前空間を圧迫する．ただしこの問題は，[`NoFieldSelector`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/field_selectors.html)や[`RecordWildCards`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/record_wildcards.html)，[`OverloadedRecordDot`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/overloaded_record_dot.html)を用いると，そこまで問題ではなくなる．Haskell Day 2021のfumieval氏の発表「[Haskell は別言語になりました――RecordDotSyntax と NoFieldSelectors](https://youtu.be/haZl-q6mfyk?t=2581)」も参考．
+-->
+
+- Exporting selector function overwhelms the namespace. However, it doesn't really matter because of [`NoFieldSelector`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/field_selectors.html), [`RecordWildCards`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/record_wildcards.html), and [`OverloadedRecordDot`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/overloaded_record_dot.html). Also refer to the presentation "Haskell is now a different language――RecordDotSyntax and NoFieldSelectors](https://youtu.be/haZl-q6mfyk?t=2581)". (In Japanese).

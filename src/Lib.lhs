@@ -53,3 +53,16 @@ lomias = Person {name = "ロミアス", age = 24}
 
 - 一番コード量が少ない．
 - コードがわかりやすい．
+
+#### 欠点
+
+- データ構造を変更すると，そのデータ構造を使用しているすべてのコードを変更する必要がある．
+- データ構造をライブラリとして公開している場合，データ構造の変更は破壊的変更となり，バージョンを上げる必要がある．
+- 妥当ではない値も生成できてしまう．
+
+```haskell
+invalidPerson :: Person
+invalidPerson = Person {name = "", age = -1}
+```
+
+- セレクタ関数をエクスポートすることで，名前空間を圧迫する．ただしこの問題は，[`NoFieldSelector`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/field_selectors.html)や[`RecordWildCards`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/record_wildcards.html)，[`OverloadedRecordDot`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/overloaded_record_dot.html)を用いると，そこまで問題ではなくなる．Haskell Day 2021のfumieval氏の発表「[Haskell は別言語になりました――RecordDotSyntax と NoFieldSelectors](https://youtu.be/haZl-q6mfyk?t=2581)」も参考．
