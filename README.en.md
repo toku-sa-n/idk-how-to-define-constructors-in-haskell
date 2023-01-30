@@ -256,3 +256,81 @@ testInvalidPersonIsNothing =
     describe "invalidPerson'" $
     it "returns a `Nothing" $ invalidPerson' `shouldBe` Nothing
 ```
+
+<!--
+#### 利点
+-->
+
+#### Advantages
+
+<!--
+- データ構造の中身を公開する必要がないため，構造を変更しても他のコードを同様に変更したり，ライブラリのバージョンを上げる必要がない．（ただしコンストラクタ関数の意味やシグネチャを変更したら当然それらを行う必要はある）
+- 無効なデータが生成されることを防ぐことができる．場合によっては`error`を呼び出して直ちにプログラムを終了させたり，エラー型を用いてエラーを呼び出し側に通知することもできる．
+-->
+
+- Since the contents of the data structure do not need to be exposed, changing the structure does not require changing other code as well or increasing the version of the library. (However, if the semantics or signatures of the constructor functions are changed, it is of course necessary to do so.)
+- It can prevent the generation of invalid data. Depending on the situation, the program can be terminated immediately by calling `error`, or it can notify the caller of an error by using an error type.
+
+<!--
+```haskell
+mkPerson' :: String -> Int -> Person
+mkPerson' name age
+    | null name = error "空の名前が渡されました．"
+    | age < 0 = error "年齢が負です．"
+    | otherwise = Person {..}
+
+testPanicOnEmptyName :: Spec
+testPanicOnEmptyName =
+    describe "mkPerson'" $
+    it "空の名前を渡すと「空の名前が渡されました．」というエラー文を表示してプログラムが終了する" $
+    evaluate (mkPerson' "" 1) `shouldThrow` errorCall "空の名前が渡されました．"
+
+data PersonError
+    = EmptyName
+    | NegativeAge
+    deriving (Eq, Show)
+
+mkPerson'' :: String -> Int -> Either PersonError Person
+mkPerson'' name age
+    | null name = Left EmptyName
+    | age < 0 = Left NegativeAge
+    | otherwise = Right Person {..}
+
+testLeftNegativeAge :: Spec
+testLeftNegativeAge =
+    describe "mkPerson''" $
+    it "負の年齢を渡すと`Left NegativeAge`を返す．" $
+    mkPerson'' "Tom" (-3) `shouldBe` Left NegativeAge
+```
+-->
+
+```haskell
+mkPerson' :: String -> Int -> Person
+mkPerson' name age
+    | null name = error "An empty name is passed."
+    | age < 0 = error "The age is empty."
+    | otherwise = Person {..}
+
+testPanicOnEmptyName :: Spec
+testPanicOnEmptyName =
+    describe "mkPerson'" $
+    it "raises an error with the error message \"An empty name is passed.\"." $
+    evaluate (mkPerson' "" 1) `shouldThrow` errorCall "An empty name is passed."
+
+data PersonError
+    = EmptyName
+    | NegativeAge
+    deriving (Eq, Show)
+
+mkPerson'' :: String -> Int -> Either PersonError Person
+mkPerson'' name age
+    | null name = Left EmptyName
+    | age < 0 = Left NegativeAge
+    | otherwise = Right Person {..}
+
+testLeftNegativeAge :: Spec
+testLeftNegativeAge =
+    describe "mkPerson''" $
+    it "returns a `Left NegativeAge` if a negative age is passed." $
+    mkPerson'' "Tom" (-3) `shouldBe` Left NegativeAge
+```

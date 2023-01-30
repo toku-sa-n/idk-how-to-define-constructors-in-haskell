@@ -1,6 +1,9 @@
+import           Lib
 import           Test.Hspec
-import Lib
 
 main :: IO ()
 main =
-  hspec testInvalidPersonIsNothing
+    hspec $ do
+        testInvalidPersonIsNothing
+        testPanicOnEmptyName
+        testLeftNegativeAge
