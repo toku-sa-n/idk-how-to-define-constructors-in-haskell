@@ -96,6 +96,3 @@ testInvalidPersonIsNothing =
     it "`Nothing`を返す" $ invalidPerson' `shouldBe` Nothing
 ```
 
-#### 利点
-
--
