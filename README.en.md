@@ -71,6 +71,54 @@ The code in the article is compiled and executed daily on GitHub Actions using t
 Check [stack.yaml](stack.yaml) and [package.yaml](package.yaml) for the Stack resolver and library versions used.
 
 <!--
+## 評価
+-->
+
+## Evaluation
+
+<!--
+これから紹介する方法を，以下の観点で評価していきます．
+-->
+
+I will evaluate the methods I will present in the following perspectives.
+
+<!--
+### 記述量の短さ
+-->
+
+### The amount of lines
+
+<!--
+当然ながら，基本的に短いほどよいです．
+-->
+
+Of course, basically, the shorter it is, the better.
+
+<!--
+### データ構造を隠蔽しているかどうか
+-->
+
+### Whether the data structure is hidden or not.
+
+<!--
+データ構造は基本的に隠蔽するべきです．公開した場合，その構造を変更するとそのデータ構造を使用しているすべてのコードを変更する必要があります．また，データ構造をライブラリとして公開している場合，ライブラリのバージョンを上げる必要があります．
+-->
+
+Basically, data structures should be hidden. If a structure is disclosed, any changes to it will require changes to all code that uses it. If the data structure is published as a library, the library version must be upgraded.
+
+<!--
+### 不正な値の生成を防いでいるか
+-->
+
+### Whether illegal values are prevented from being generated
+
+<!--
+空の名前や負の年齢などの値域から外れている値や，同じ要素を複数個含む集合など，値が持つべき前提から逸脱しているような値はそもそも生成されるべきではありません．またそのような値を生成しようとした際は，エラーを返すなどとして適切に対処するべきです．
+-->
+
+Values that deviate from the assumptions that values should have, such as empty names, negative ages, and sets that contain multiple elements of the same value, should not be generated in the first place. If such a value is attempted to be generated, it should be handled appropriately such as by returning an error message.
+
+<!--
 ## 値を構築する様々な方法
 -->
 
