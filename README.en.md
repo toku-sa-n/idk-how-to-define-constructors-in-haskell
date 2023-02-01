@@ -95,10 +95,10 @@ I will evaluate the methods I will present in the following perspectives.
 Of course, basically, the shorter it is, the better.
 
 <!--
-### データ構造を隠蔽しているかどうか
+### データ構造を隠蔽できるかどうか
 -->
 
-### Whether the data structure is hidden or not.
+### Whether the data structure can be hidden
 
 <!--
 データ構造は基本的に隠蔽するべきです．公開した場合，その構造を変更するとそのデータ構造を使用しているすべてのコードを変更する必要があります．また，データ構造をライブラリとして公開している場合，ライブラリのバージョンを上げる必要があります．
@@ -107,10 +107,10 @@ Of course, basically, the shorter it is, the better.
 Basically, data structures should be hidden. If a structure is disclosed, any changes to it will require changes to all code that uses it. If the data structure is published as a library, the library version must be upgraded.
 
 <!--
-### 不正な値の生成を防いでいるか
+### 不正な値の生成を防ぐことができるかどうか
 -->
 
-### Whether illegal values are prevented from being generated
+### Whether the generation of illegal values can be prevented
 
 <!--
 空の名前や負の年齢などの値域から外れている値や，同じ要素を複数個含む集合など，値が持つべき前提から逸脱しているような値はそもそも生成されるべきではありません．またそのような値を生成しようとした際は，エラーを返すなどとして適切に対処するべきです．
@@ -259,7 +259,7 @@ invalidPerson = Person {name = "", age = -1}
 ### [スマートコンストラクタ](https://wiki.haskell.org/Smart_constructors)を定義する
 -->
 
-### Define [smart constructor](https://wiki.haskell.org/Smart_constructors)
+### Define [smart constructors](https://wiki.haskell.org/Smart_constructors)
 
 <!--
 #### 概要
