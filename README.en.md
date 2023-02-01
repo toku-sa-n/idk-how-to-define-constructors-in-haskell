@@ -29,16 +29,28 @@
 This article discusses how to let users of a type construct the value of that type in Haskell.
 
 <!--
-## このファイルについて
+## リポジトリ内のファイルについて
 -->
 
-## About [`README.md`](/README.md)
+## About files in this repository
 
 <!--
-このファイルは，[markdown-unlit](https://github.com/sol/markdown-unlit)を用いた一つの`.lhs`ファイルです．したがって，すべてのHaskellコードブロックは連結しており，あるコードブロック内で定義されている関数や有効になっているプラグマは，すべてのコードブロック内で利用可能，または有効になっています．
+このリポジトリは，単一のStackライブラリとなっています．リポジトリのルートディレクトリで`stack test`を実行することで，このライブラリをテストすることができます．
 -->
 
-[`README.md`](/README.md) is a `.lhs` file using [markdown-unlit](https://github.com/sol/markdown-unlit). Thus, all Haskell code blocks are linked, and functions defined or pragmas enabled in one code block are available or enabled in all code blocks.
+This repository is a single Stack library. You can test this library by running `stack test` in the repository root directory.
+
+<!--
+[`src/Lib.lhs`](/src/Lib.lhs)では[markdown-unlit](https://github.com/sol/markdown-unlit)を用いており，[`README.md`](/README.md)はそのファイルへのシンボリックリンクです．ファイル内のすべてのHaskellコードブロックは連結しており，それらをすべて順番に結合したものが最終的なコードとなります．
+-->
+
+I use [markdown-unlit](https://github.com/sol/markdown-unlit) in [`src/Lib.lhs`](/src/Lib.lhs), and [`README.md`](/README.md) is a symbolic link to it. All Haskell code blocks in the file are linked together, and the final code is obtained by concatenating them all in sequence.
+
+<!--
+なお，英語版のREADMEである[`README.en.md`](/README.en.md)は`.lhs`ファイルではありませんが，[`README.md`](/README.md)同様，すべてのコードブロックは連結しているものと見做してください．
+-->
+
+Note that [`README.en.md`](/README.en.md), the English version of README, is not a `.lhs` file. However, please assume that all code blocks are linked, as in [`README.md`](/README.md).
 
 <!--
 ## ライセンス
