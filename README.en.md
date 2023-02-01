@@ -32,7 +32,7 @@ This article discusses how to let users of a type construct the value of that ty
 ## このファイルについて
 -->
 
-## About this file
+## About [`README.md`](/README.md)
 
 <!--
 このファイルは，[markdown-unlit](https://github.com/sol/markdown-unlit)を用いた一つの`.lhs`ファイルです．したがって，すべてのHaskellコードブロックは連結しており，あるコードブロック内で定義されている関数や有効になっているプラグマは，すべてのコードブロック内で利用可能，または有効になっています．
