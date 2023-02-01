@@ -38,7 +38,7 @@ This article discusses how to let users of a type construct the value of that ty
 このファイルは，[markdown-unlit](https://github.com/sol/markdown-unlit)を用いた一つの`.lhs`ファイルです．したがって，すべてのHaskellコードブロックは連結しており，あるコードブロック内で定義されている関数や有効になっているプラグマは，すべてのコードブロック内で利用可能，または有効になっています．
 -->
 
-[`README.md`] is a `.lhs` file using [markdown-unlit](https://github.com/sol/markdown-unlit). Thus, all Haskell code blocks are linked, and functions defined or pragmas enabled in one code block are available or enabled in all code blocks.
+[`README.md`](/README.md) is a `.lhs` file using [markdown-unlit](https://github.com/sol/markdown-unlit). Thus, all Haskell code blocks are linked, and functions defined or pragmas enabled in one code block are available or enabled in all code blocks.
 
 <!--
 ## ライセンス
