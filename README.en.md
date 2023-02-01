@@ -23,10 +23,10 @@
 ## Introduction
 
 <!--
-この記事では，Haskellにおいて，どのような手段で利用者に値を構築させるかについて考察します．
+この記事では，Haskellにおいて，どのような手段で型の利用者にその型の値を構築させるかについて考察します．
 -->
 
-This article discusses how to let users construct values in Haskell.
+This article discusses how to let users of a type construct the value of that type in Haskell.
 
 <!--
 ## このファイルについて
