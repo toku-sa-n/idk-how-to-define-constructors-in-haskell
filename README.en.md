@@ -23,7 +23,7 @@
 ## Introduction
 
 <!--
-この記事では，Haskellにおいて，どのように手段で利用者に値を構築させるかについて考察します．
+この記事では，Haskellにおいて，どのような手段で利用者に値を構築させるかについて考察します．
 -->
 
 This article discusses how to let users construct values in Haskell.
