@@ -217,6 +217,12 @@ Expose the internal structure of the type in the export list as `Foo(...) ` etc.
 #### Code example
 
 <!--
+エクスポート一覧の例は上部にあります．
+-->
+
+An example of the export list is given above.
+
+<!--
 ```haskell
 data Person = Person
     { name :: String
