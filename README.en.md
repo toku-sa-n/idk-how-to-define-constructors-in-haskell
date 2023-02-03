@@ -275,6 +275,50 @@ The amount of code on the provider side is very small, since you can simply writ
 It depends on the type. The larger the number of arguments or record fields that a value constructor has, the longer the code will be.
 
 <!--
+ただし，予めデフォルト値を提供し，必要ならば利用者にその一部を変更してもらうという方法にすると，コードを削減できる場合があります．一例として，[`data-default`](https://hackage.haskell.org/package/data-default)を使用した方法を紹介します．
+-->
+
+However, it may be possible to reduce the amount of code by providing a default value in advance and allowing users to change parts of the value if necessary. As an example, here is a method using [`data-default`](https://hackage.haskell.org/package/data-default).
+
+<!--
+```haskell
+data Foo = Foo
+    { bar :: Int
+    , baz :: Int
+    } deriving (Eq, Show)
+
+instance Default Foo where
+    def = Foo {bar = 0, baz = 0}
+
+foo :: Foo
+foo = def {bar = 1}
+
+testFooDef :: Spec
+testFooDef =
+    describe "foo" $
+    it "Foo {bar = 1, baz = 0}" $ foo `shouldBe` Foo {bar = 1, baz = 0}
+```
+-->
+
+```haskell
+data Foo = Foo
+    { bar :: Int
+    , baz :: Int
+    } deriving (Eq, Show)
+
+instance Default Foo where
+    def = Foo {bar = 0, baz = 0}
+
+foo :: Foo
+foo = def {bar = 1}
+
+testFooDef :: Spec
+testFooDef =
+    describe "foo" $
+    it "Foo {bar = 1, baz = 0}" $ foo `shouldBe` Foo {bar = 1, baz = 0}
+```
+
+<!--
 ##### 型の内部構造を隠蔽できるかどうか
 -->
 
