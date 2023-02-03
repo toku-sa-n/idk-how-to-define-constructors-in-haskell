@@ -335,10 +335,10 @@ This method also exports selector functions, which takes up too much namespaces.
 The data structure is not exposed; instead, define a function that generates a value based on the arguments.
 
 <!--
-Haskellではそのような関数を定義する際，[`mk`という接頭辞をつけることが一般的](https://kowainik.github.io/posts/naming-conventions)のようです．
+Haskellではそのような関数を定義する際，[`mk`](https://kowainik.github.io/posts/naming-conventions)や[`from`](https://hackage.haskell.org/package/base-4.17.0.0/docs/Data-List-NonEmpty.html#v:fromList)という接頭辞をつけることが一般的のようです．後者は特に，引数が一つの場合に用いられます．
 -->
 
-In Haskell, it is common to [add the prefix `mk`](https://kowainik.github.io/posts/naming-conventions) when defining such a function.
+In Haskell, it is common to add a prefix like [`mk`](https://kowainik.github.io/posts/naming-conventions) or [`from`](https://hackage.haskell.org/package/base-4.17.0.0/docs/Data-List-NonEmpty.html#v:fromList). The latter in particular is used when the number of parameters is one.
 
 <!--
 #### コード例

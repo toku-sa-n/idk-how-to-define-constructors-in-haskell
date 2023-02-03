@@ -142,7 +142,7 @@ invalidPerson = Person {name = "", age = -1}
 
 データ構造は公開せず，代わりに引数を基に値を生成する関数を定義します．
 
-Haskellではそのような関数を定義する際，[`mk`という接頭辞をつけることが一般的](https://kowainik.github.io/posts/naming-conventions)のようです．
+Haskellではそのような関数を定義する際，[`mk`](https://kowainik.github.io/posts/naming-conventions)や[`from`](https://hackage.haskell.org/package/base-4.17.0.0/docs/Data-List-NonEmpty.html#v:fromList)という接頭辞をつけることが一般的のようです．後者は特に，引数が一つの場合に用いられます．
 
 #### コード例
 
