@@ -155,7 +155,10 @@ Values that deviate from the assumptions that values should have, such as empty 
 {-# LANGUAGE RecordWildCards       #-}
 
 module Lib
-    ( testInvalidPersonIsNothing
+    ( Person(..)
+    , Foo(..)
+    , testFooDef
+    , testInvalidPersonIsNothing
     , testPanicOnEmptyName
     , testLeftNegativeAge
     , testMkLongevity
@@ -163,6 +166,7 @@ module Lib
     ) where
 
 import           Control.Exception
+import           Data.Default
 import           Test.Hspec
 ```
 -->
@@ -173,7 +177,10 @@ import           Test.Hspec
 {-# LANGUAGE RecordWildCards       #-}
 
 module Lib
-    ( testInvalidPersonIsNothing
+    ( Person(..)
+    , Foo(..)
+    , testFooDef
+    , testInvalidPersonIsNothing
     , testPanicOnEmptyName
     , testLeftNegativeAge
     , testMkLongevity
@@ -181,6 +188,7 @@ module Lib
     ) where
 
 import           Control.Exception
+import           Data.Default
 import           Test.Hspec
 ```
 
