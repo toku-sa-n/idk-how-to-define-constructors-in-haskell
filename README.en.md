@@ -107,16 +107,16 @@ I will evaluate the methods I will present in the following perspectives.
 Of course, basically, the shorter it is, the better.
 
 <!--
-### データ構造を隠蔽できるかどうか
+### 型の内部構造を隠蔽できるかどうか
 -->
 
-### Whether the data structure can be hidden
+### Whether the internal structure of the type can be hidden
 
 <!--
 データ構造は基本的に隠蔽するべきです．公開した場合，その構造を変更するとそのデータ構造を使用しているすべてのコードを変更する必要があります．また，データ構造をライブラリとして公開している場合，ライブラリのバージョンを上げる必要があります．
 -->
 
-Basically, data structures should be hidden. If a structure is disclosed, any changes to it will require changes to all code that uses it. If the data structure is published as a library, the library version must be upgraded.
+The internal structure of a type should be basically hidden. If it is exposed, any change to the structure will require a change to all code that depends on it. Also, the generated values may later be modified, resulting in invalid values. Furthermore, if the type, including its internal structure, is available as a library, the library version must be upgraded when the structure is changed.
 
 <!--
 ### 不正な値の生成を防ぐことができるかどうか
