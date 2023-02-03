@@ -347,7 +347,7 @@ It cannot prevent it. Users can easily write codes such as the following.
 invalidPerson :: Person
 invalidPerson = Person {name = "", age = -1}
 ```
---->
+-->
 
 ```haskell
 invalidPerson :: Person
