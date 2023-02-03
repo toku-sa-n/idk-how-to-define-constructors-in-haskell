@@ -134,7 +134,7 @@ invalidPerson = Person {name = "", age = -1}
 
 ##### その他
 
-この方法は同時にセレクタ関数もエクスポートしてしまうため，名前空間を圧迫します．ただし[`NoFieldSelector`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/field_selectors.html)を有効にすることでセレクタ関数の定義を削除することが出来ます．またこの拡張機能を有効にする際は，[`RecordWildCards`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/record_wildcards.html)や[`OverloadedRecordDot`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/overloaded_record_dot.html)，[`DuplicateRecordFields`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/duplicate_record_fields.html)を用いると，コードが書きやすくなります．Haskell Day 2021のfumieval氏の発表「[Haskell は別言語になりました――RecordDotSyntax と NoFieldSelectors](https://youtu.be/haZl-q6mfyk?t=2581)」も参考にしてください．
+この方法は同時にセレクタ関数もエクスポートしてしまうため，名前空間を圧迫します．ただし，[`NoFieldSelector`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/field_selectors.html)を有効にすることでセレクタ関数の定義を削除することが出来ます．またこの拡張機能を有効にする際は，[`RecordWildCards`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/record_wildcards.html)や[`OverloadedRecordDot`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/overloaded_record_dot.html)，[`DuplicateRecordFields`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/duplicate_record_fields.html)を用いると，コードが書きやすくなります．Haskell Day 2021のfumieval氏の発表「[Haskell は別言語になりました――RecordDotSyntax と NoFieldSelectors](https://youtu.be/haZl-q6mfyk?t=2581)」も参考にしてください．
 
 ### [スマートコンストラクタ](https://wiki.haskell.org/Smart_constructors)を定義する
 
