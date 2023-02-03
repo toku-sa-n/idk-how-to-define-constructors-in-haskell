@@ -125,7 +125,7 @@ The amount of code required to construct a value using the provided means. Again
 ### Whether the internal structure of the type can be hidden
 
 <!--
-データ構造は基本的に隠蔽するべきです．公開した場合，その構造を変更するとそのデータ構造を使用しているすべてのコードを変更する必要があります．また，データ構造をライブラリとして公開している場合，ライブラリのバージョンを上げる必要があります．
+型の内部構造は基本的に隠蔽するべきです．公開した場合，その構造を変更するとそれに依存しているすべてのコードを変更する必要があります．また，生成された値があとから変更されてしまい，不正な値となってしまう恐れもあります．更に，型を内部構造も含めてライブラリとして公開している場合，構造を変更する際はライブラリのバージョンを上げる必要があります．
 -->
 
 The internal structure of a type should be basically hidden. If it is exposed, any change to the structure will require a change to all code that depends on it. Also, the generated values may later be modified, resulting in invalid values. Furthermore, if the type, including its internal structure, is available as a library, the library version must be upgraded when the structure is changed.
