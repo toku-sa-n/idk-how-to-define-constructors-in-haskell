@@ -30,6 +30,7 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -pgmL markdown-unlit
   build-depends:
       base >=4.7 && <5
+    , data-default
     , hspec
   default-language: Haskell2010
 
@@ -43,6 +44,7 @@ test-suite idk-how-to-define-constructors-in-haskell
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -pgmL markdown-unlit -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , data-default
     , hspec
     , idk-how-to-define-constructors-in-haskell
   default-language: Haskell2010

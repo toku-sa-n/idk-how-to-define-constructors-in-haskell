@@ -54,7 +54,10 @@
 {-# LANGUAGE RecordWildCards       #-}
 
 module Lib
-    ( testInvalidPersonIsNothing
+    ( Person(..)
+    , Foo(..)
+    , testFooDef
+    , testInvalidPersonIsNothing
     , testPanicOnEmptyName
     , testLeftNegativeAge
     , testMkLongevity
@@ -62,6 +65,7 @@ module Lib
     ) where
 
 import           Control.Exception
+import           Data.Default
 import           Test.Hspec
 ```
 
@@ -73,6 +77,8 @@ import           Test.Hspec
 
 #### コード例
 
+エクスポート一覧の例は上部にあります．
+
 ```haskell
 data Person = Person
     { name :: String
@@ -83,23 +89,52 @@ lomias :: Person
 lomias = Person {name = "ロミアス", age = 24}
 ```
 
-#### 利点
+#### 評価
 
-- 一番コード量が少ない．
-- コードがわかりやすい．
+##### 値の構築手段を提供するためのコードの量
 
-#### 欠点
+単にエクスポート一覧で`Person(..)`などと書けばよいため，提供側のコード量は非常に少ないです．
 
-- データ構造を変更すると，そのデータ構造を使用しているすべてのコードを変更する必要がある．
-- データ構造をライブラリとして公開している場合，データ構造の変更は破壊的変更となり，バージョンを上げる必要がある．
-- 妥当ではない値も生成できてしまう．
+##### 値を構築するためのコードの量
+
+これは型によります．値コンストラクタが持つ引数やレコードのフィールド数が大きくなるとそれだけコードは長くなります．
+
+ただし，予めデフォルト値を提供し，必要ならば利用者にその一部を変更してもらうという方法にすると，コードを削減できる場合があります．一例として，[`data-default`](https://hackage.haskell.org/package/data-default)を使用した方法を紹介します．
+
+```haskell
+data Foo = Foo
+    { bar :: Int
+    , baz :: Int
+    } deriving (Eq, Show)
+
+instance Default Foo where
+    def = Foo {bar = 0, baz = 0}
+
+foo :: Foo
+foo = def {bar = 1}
+
+testFooDef :: Spec
+testFooDef =
+    describe "foo" $
+    it "Foo {bar = 1, baz = 0}" $ foo `shouldBe` Foo {bar = 1, baz = 0}
+```
+
+##### 型の内部構造を隠蔽できるかどうか
+
+全く隠蔽していません．
+
+##### 不正な値の生成を防ぐことができるかどうか
+
+防げません．利用者は以下のようなコードを容易に書くことが出来てしまいます．
 
 ```haskell
 invalidPerson :: Person
 invalidPerson = Person {name = "", age = -1}
 ```
 
-- セレクタ関数をエクスポートすることで，名前空間を圧迫する．ただしこの問題は，[`NoFieldSelector`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/field_selectors.html)や[`RecordWildCards`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/record_wildcards.html)，[`OverloadedRecordDot`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/overloaded_record_dot.html)を用いると，そこまで問題ではなくなる．Haskell Day 2021のfumieval氏の発表「[Haskell は別言語になりました――RecordDotSyntax と NoFieldSelectors](https://youtu.be/haZl-q6mfyk?t=2581)」も参考．
+##### その他
+
+この方法は同時にセレクタ関数もエクスポートしてしまうため，名前空間を圧迫します．ただし[`NoFieldSelector`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/field_selectors.html)を有効にすることでセレクタ関数の定義を削除することが出来ます．またこの拡張機能を有効にする際は，[`RecordWildCards`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/record_wildcards.html)や[`OverloadedRecordDot`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/overloaded_record_dot.html)，[`DuplicateRecordFields`](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/duplicate_record_fields.html)を用いると，コードが書きやすくなります．Haskell Day 2021のfumieval氏の発表「[Haskell は別言語になりました――RecordDotSyntax と NoFieldSelectors](https://youtu.be/haZl-q6mfyk?t=2581)」も参考にしてください．
 
 ### [スマートコンストラクタ](https://wiki.haskell.org/Smart_constructors)を定義する
 
