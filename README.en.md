@@ -431,18 +431,60 @@ testInvalidPersonIsNothing =
 ```
 
 <!--
-#### 利点
+#### 評価
 -->
 
-#### Advantages
+#### Evaluation
 
 <!--
-- データ構造の中身を公開する必要がないため，構造を変更しても他のコードを同様に変更したり，ライブラリのバージョンを上げる必要がない．（ただしコンストラクタ関数の意味やシグネチャを変更したら当然それらを行う必要はある）
-- 無効なデータが生成されることを防ぐことができる．場合によっては`error`を呼び出して直ちにプログラムを終了させることができる．
+##### 値の構築手段を提供するためのコードの量
 -->
 
-- Since the contents of the data structure do not need to be exposed, changing the structure does not require changing other code as well or increasing the version of the library. (However, if the semantics or signatures of the constructor functions are changed, it is of course necessary to do so.)
-- It can prevent the generation of invalid data. Depending on the situation, the program can be terminated immediately by calling `error`.
+### The amount of code to provide a means of constructing a value
+
+<!--
+定義するコンストラクタの数や，コンストラクタ内の処理によりますが，比較的コード量は少ないと思います．
+-->
+
+Although it depends on the number of constructors defined and the processing within the constructors, the amount of code should be relatively small.
+
+<!--
+### 値を構築するためのコードの量
+-->
+
+### The amount of code to construct a value
+
+It should also be relatively small, although it will be a bit larger if it does extra processes like error handling.
+
+<!--
+### 型の内部構造を隠蔽できるかどうか
+-->
+
+### Whether the internal structure of the type can be hidden
+
+<!--
+型の名前とコンストラクタ関数のみを公開すればよいため，型の内部構造は隠蔽できます．
+-->
+
+You can hide the internal structure of a type because you only need to expose the type name and constructor functions.
+
+<!--
+### 不正な値の生成を防ぐことができるかどうか
+-->
+
+### Whether the generation of illegal values can be prevented
+
+<!--
+上記の例のように，受け取った引数を精査することで，不正な値が生成されようとしたときに`Nothing`などを返すことが出来ます．
+-->
+
+As shown in the example above, constructor functions can check the received arguments and return something like `Nothing` if the caller attempts to generate an invalid value.
+
+<!--
+場合によっては`error`を呼び出して直ちにプログラムを終了させることも出来ます．
+-->
+
+It is also possible to terminate the program immediately by invoking `error`.
 
 <!--
 ```haskell
@@ -464,21 +506,21 @@ testPanicOnEmptyName =
 mkPerson' :: String -> Int -> Person
 mkPerson' name age
     | null name = error "An empty name is passed."
-    | age < 0 = error "The age is empty."
+    | age < 0 = error "The age is negative."
     | otherwise = Person {..}
 
 testPanicOnEmptyName :: Spec
 testPanicOnEmptyName =
     describe "mkPerson'" $
-    it "raises an error with the error message \"An empty name is passed.\"." $
+    it "prints the error message \"An empty name is passed.\" and terminates the program if it receives an empty name." $
     evaluate (mkPerson' "" 1) `shouldThrow` errorCall "An empty name is passed."
 ```
 
 <!--
-あるいは，エラー型を用いてエラーを呼び出し側に通知することもできる．
+あるいは，エラー型を用いてエラーを呼び出し側に通知することもできます．
 -->
 
-Alternatively, it can notify the caller of an error by using an error type.
+Or, you can use error types to notify the caller of an error.
 
 <!--
 ```haskell
@@ -516,15 +558,21 @@ mkPerson'' name age
 testLeftNegativeAge :: Spec
 testLeftNegativeAge =
     describe "mkPerson''" $
-    it "returns a `Left NegativeAge` if a negative age is passed." $
+    it "returns a `Left NegativeAge` if it receives a negative age." $
     mkPerson'' "Tom" (-3) `shouldBe` Left NegativeAge
 ```
 
 <!--
-- 状況に応じて複数のコンストラクタ関数を定義できる．
+##### その他
 -->
 
-- Multiple constructor functions can be defined depending on the situation.
+##### Others
+
+<!--
+状況に応じて複数のコンストラクタ関数を定義することも可能です．
+-->
+
+Depending on the situation, you can define multiple constructor functions.
 
 <!--
 ```haskell
@@ -539,7 +587,6 @@ testMkLongevity =
 ```
 -->
 
-
 ```haskell
 mkLongevity :: String -> Either PersonError Person
 mkLongevity name = mkPerson'' name 100
@@ -547,25 +594,15 @@ mkLongevity name = mkPerson'' name 100
 testMkLongevity :: Spec
 testMkLongevity =
     describe "mkLongevity" $
-    it "creates a `Person` whose age is 100 years old." $
+    it "generates a `Person` whose age is 100 years old." $
     mkLongevity "Tom" `shouldBe` Right Person {name = "Tom", age = 100}
 ```
 
 <!--
-#### 欠点
+この方式の欠点として，コンストラクタ関数の引数が増えるとコードが読みづらくなることを挙げておきます．
 -->
 
-#### Disadvantages
-
-<!--
-- コンストラクタ関数の引数が増えるとコードが読みづらくなる．
--->
-
-- As the number of parameters of a constructor function increases, the code becomes more difficult to read.
-
-<!--
-### Builderパターンを用いる
--->
+One drawback of this method is that the code becomes more difficult to read as the number of arguments to the constructor function increases.
 
 ### Using the Builder Pattern
 
