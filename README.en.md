@@ -95,16 +95,28 @@ Check [stack.yaml](stack.yaml) and [package.yaml](package.yaml) for the Stack re
 I will evaluate the methods I will present in the following perspectives.
 
 <!--
-### 記述量の短さ
+### 値の構築手段を提供するためのコードの量
 -->
 
-### The amount of lines
+### The amount of code to provide a means of constructing a value
 
 <!--
-当然ながら，基本的に短いほどよいです．
+型自体の定義以外に必要とするコードの量です．基本的に短いほうが良いです．
 -->
 
-Of course, basically, the shorter it is, the better.
+The amount of code required other than the type definition itself. Basically, the shorter it is, the better.
+
+<!--
+### 値を構築するためのコードの量
+-->
+
+### The amount of code to construct a value
+
+<!--
+用意された手段で値を構築しようとする際に必要とするコードの量です．こちらも基本的に短いほうが良いです．
+-->
+
+The amount of code required to construct a value using the provided means. Again, basically, the shorter it is, the better.
 
 <!--
 ### 型の内部構造を隠蔽できるかどうか
