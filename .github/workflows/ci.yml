@@ -46,10 +46,11 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
+            ${{ steps.haskell-setup.outputs.cabal-store }}
             ${{ steps.haskell-setup.outputs.stack-root }}
             .stack-work
-          key: stack-${{ hashFiles('stack.yaml.lock') }}-${{ github.sha }}
-          restore-keys: stack-${{ hashFiles('stack.yaml.lock') }}
+          key: stack-${{ hashFiles('stack.yaml.lock', '*.cabal') }}-${{ github.sha }}
+          restore-keys: stack-${{ hashFiles('stack.yaml.lock', '*.cabal') }}
 
       - name: Update the Cabal index
         run: cabal update
@@ -60,5 +61,8 @@ jobs:
       - name: Update PATH
         run: echo "$HOME/.cabal/bin" >> $GITHUB_PATH
 
-      - name: Run tests
+      - name: Run tests with Cabal
+        run: cabal test
+
+      - name: Run tests with Stack
         run: stack test
