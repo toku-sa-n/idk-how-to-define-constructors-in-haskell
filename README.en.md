@@ -860,7 +860,7 @@ It depends on the type. The code will be longer as the number of parameters of a
 ### The amount of code to construct a value
 
 <!--
-こちらも使用する関数の数によりますが，やはり単にコンストラクタ関数を呼び出すよりも量が多くなります．
+こちらも型によりますが，やはりBuilderパターンよりは短くなると思います．
 -->
 
 This also depends on the type, but it should be shorter than the Builder pattern.
