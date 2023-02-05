@@ -163,6 +163,7 @@ module Lib
     , testLeftNegativeAge
     , testMkLongevity
     , testLarnneire
+    , testLoyter
     ) where
 
 import           Control.Exception
@@ -185,6 +186,7 @@ module Lib
     , testLeftNegativeAge
     , testMkLongevity
     , testLarnneire
+    , testLoyter
     ) where
 
 import           Control.Exception
@@ -763,3 +765,126 @@ Since we only need to expose type names and functions, we can hide the internal 
 -->
 
 It can be achieved by examining values inside each function.
+
+<!--
+### 値を構築するための型を定義し，その内部構造を公開する
+-->
+
+### Define a type to construct a value and expose its internal structure
+
+<!--
+#### 概要
+-->
+
+#### Introduction
+
+<!--
+Builderパターンと同じように，値を構築するための別の型を定義しますが，その型の内部構造を公開します．
+-->
+
+Define a separate type to construct a value, just like the Builder pattern, but expose the internal structure of the type.
+
+<!--
+#### コード例
+-->
+
+#### Code example
+
+<!--
+```haskell
+data PersonBuilder' = PersonBuilder'
+    { name :: String
+    , age  :: Int
+    }
+
+mkPerson'''' :: PersonBuilder' -> Either PersonError Person
+mkPerson'''' PersonBuilder' {..}
+    | null name = Left EmptyName
+    | age < 0 = Left NegativeAge
+    | otherwise = Right Person {..}
+
+loyter :: Either PersonError Person
+loyter = mkPerson'''' PersonBuilder' {name = "ロイター", age = 32}
+
+testLoyter :: Spec
+testLoyter =
+    describe "loyter" $
+    it "`Right`値を返す" $ loyter `shouldBe` Right Person {name = "ロイター", age = 32}
+```
+-->
+
+```haskell
+data PersonBuilder' = PersonBuilder'
+    { name :: String
+    , age  :: Int
+    }
+
+mkPerson'''' :: PersonBuilder' -> Either PersonError Person
+mkPerson'''' PersonBuilder' {..}
+    | null name = Left EmptyName
+    | age < 0 = Left NegativeAge
+    | otherwise = Right Person {..}
+
+loyter :: Either PersonError Person
+loyter = mkPerson'''' PersonBuilder' {name = "Loyter", age = 32}
+
+testLoyter :: Spec
+testLoyter =
+    describe "loyter" $
+    it "returns a `Right` value" $
+    loyter `shouldBe` Right Person {name = "Loyter", age = 32}
+```
+
+<!--
+#### 評価
+-->
+
+#### Evaluation
+
+<!--
+##### 値の構築手段を提供するためのコードの量
+-->
+
+##### The amount of code to provide a means of constructing a value
+
+<!--
+型によります．値コンストラクタが持つ引数やレコードのフィールド数が大きくなるとそれだけコードは長くなりますが，Builderパターンよりは短くなると思います．
+-->
+
+It depends on the type. The code will be longer as the number of parameters of a value constructor or the number of fields in a record increases. However, the code should be shorter than that of the Builder Pattern.
+
+<!--
+##### 値を構築するためのコードの量
+-->
+
+### The amount of code to construct a value
+
+<!--
+こちらも使用する関数の数によりますが，やはり単にコンストラクタ関数を呼び出すよりも量が多くなります．
+-->
+
+This also depends on the type, but it should be shorter than the Builder pattern.
+
+<!--
+##### 型の内部構造を隠蔽できるかどうか
+-->
+
+##### Whether the internal structure of the type can be hidden
+
+<!--
+最終的に生成される値の型については隠蔽できますが，その生成のために用いる型に関しては公開しています．
+-->
+
+It can be hidden for the type of the final generated value, but for the type used to generate it, it is exposed.
+
+<!--
+##### 不正な値の生成を防ぐことができるかどうか
+-->
+
+##### Whether the generation of illegal values can be prevented
+
+<!--
+最終的な値を生成する際に，その元となる型の値（上記における`PersonBuilder'`）を精査することで不正な値の生成を防ぐことはできます．ただし，生成元の値に関しては途中で不正な値となり得ます．一見問題なさそうですが，利用者が型を変換せずに値を使用することがないよう，注意する必要があります．
+-->
+
+It is possible to prevent the generation of illegal values by examining the value of the source type (`PersonBuilder'` in the above example) when the final value is being generated. However, the source value can become invalid in the process. Although it does not seem to be a problem at first glance, you should be careful not to let users use the value before converting it to the final type.

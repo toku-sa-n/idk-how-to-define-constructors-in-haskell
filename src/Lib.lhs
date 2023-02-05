@@ -62,6 +62,7 @@ module Lib
     , testLeftNegativeAge
     , testMkLongevity
     , testLarnneire
+    , testLoyter
     ) where
 
 import           Control.Exception
@@ -295,3 +296,50 @@ testLarnneire =
 ##### 不正な値の生成を防ぐことができるかどうか
 
 各関数内で値の精査を行うことで達成できます．
+
+### 値を構築するための型を定義し，その内部構造を公開する
+
+#### 概要
+
+Builderパターンと同じように，値を構築するための別の型を定義しますが，その型の内部構造を公開します．
+
+#### コード例
+
+```haskell
+data PersonBuilder' = PersonBuilder'
+    { name :: String
+    , age  :: Int
+    }
+
+mkPerson'''' :: PersonBuilder' -> Either PersonError Person
+mkPerson'''' PersonBuilder' {..}
+    | null name = Left EmptyName
+    | age < 0 = Left NegativeAge
+    | otherwise = Right Person {..}
+
+loyter :: Either PersonError Person
+loyter = mkPerson'''' PersonBuilder' {name = "ロイター", age = 32}
+
+testLoyter :: Spec
+testLoyter =
+    describe "loyter" $
+    it "`Right`値を返す" $ loyter `shouldBe` Right Person {name = "ロイター", age = 32}
+```
+
+#### 評価
+
+##### 値の構築手段を提供するためのコードの量
+
+型によります．値コンストラクタが持つ引数やレコードのフィールド数が大きくなるとそれだけコードは長くなりますが，Builderパターンよりは短くなると思います．
+
+##### 値を構築するためのコードの量
+
+こちらも型によりますが，やはりBuilderパターンよりは短くなると思います．
+
+##### 型の内部構造を隠蔽できるかどうか
+
+最終的に生成される値の型については隠蔽できますが，その生成のために用いる型に関しては公開しています．
+
+##### 不正な値の生成を防ぐことができるかどうか
+
+最終的な値を生成する際に，その元となる型の値（上記における`PersonBuilder'`）を精査することで不正な値の生成を防ぐことはできます．ただし，生成元の値に関しては途中で不正な値となり得ます．一見問題なさそうですが，利用者が型を変換せずに値を使用することがないよう，注意する必要があります．

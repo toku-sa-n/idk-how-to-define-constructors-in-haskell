@@ -10,3 +10,4 @@ main =
         testLeftNegativeAge
         testMkLongevity
         testLarnneire
+        testLoyter
