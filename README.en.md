@@ -454,6 +454,10 @@ Although it depends on the number of constructors defined and the processing wit
 
 ##### The amount of code to construct a value
 
+<!--
+エラー処理などを行う場合は多少長くなると思いますが，関数一つを呼ぶだけですので，こちらも他の方法と比較すると短いと思います．
+-->
+
 It should also be relatively small, although it will be a bit larger if it does extra processes like error handling.
 
 <!--
