@@ -613,10 +613,10 @@ One drawback of this method is that the code becomes more difficult to read as t
 #### Overview
 
 <!--
-値を構築するための別の型を定義し，関数を用いて最終的な値を構築します．
+まず，値を構築するための別の型を用意します．次に，その型の値に対して関数を用いて，どのような値を生成するかという設定を施します．最後にその値から，本来生成したかった型の値を生成します．
 -->
 
-Define another type to construct the value and use functions to construct the final value.
+First, define a different type to construct a value from. Next, apply functions to the values of that type to determine what value to generate. Finally, generate a value of the desired type from the value.
 
 <!--
 #### コード例
