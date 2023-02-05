@@ -608,6 +608,10 @@ testMkLongevity =
 
 One drawback of this method is that the code becomes more difficult to read as the number of arguments to the constructor function increases.
 
+<!--
+### Builderパターンを用いる
+-->
+
 ### Using the Builder Pattern
 
 <!--
@@ -705,3 +709,45 @@ testLarnneire =
     it "returns a `Right` value." $
     larnneire `shouldBe` Right Person {name = "Larnneire", age = 22}
 ```
+
+<!--
+#### 評価
+-->
+
+#### Evaluation
+
+<!--
+##### 値の構築手段を提供するためのコードの量
+-->
+
+##### The amount of code to provide a means of constructing a value
+
+<!--
+関数の数にもよりますが，スマートコンストラクタを定義するよりもかなり量が多くなると思います．
+-->
+
+Depending on the number of functions, it may become considerably bigger than defining a smart constructor.
+
+<!--
+##### 型の内部構造を隠蔽できるかどうか
+-->
+
+##### Whether the internal structure of the type can be hidden
+
+<!--
+型の名前と各関数のみを公開すればよいため，型の内部構造は隠蔽できます．
+-->
+
+Since we only need to expose type names and functions, we can hide the internal structure of the types.
+
+<!--
+##### 不正な値の生成を防ぐことができるかどうか
+-->
+
+##### Whether the generation of illegal values can be prevented
+
+<!--
+各関数内で値の精査を行うことで達成できます．
+-->
+
+It can be achieved by examining values inside each function.
