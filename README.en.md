@@ -449,18 +449,18 @@ testInvalidPersonIsNothing =
 Although it depends on the number of constructors defined and the processing within the constructors, the amount of code should be relatively small.
 
 <!--
-### 値を構築するためのコードの量
+##### 値を構築するためのコードの量
 -->
 
-### The amount of code to construct a value
+##### The amount of code to construct a value
 
 It should also be relatively small, although it will be a bit larger if it does extra processes like error handling.
 
 <!--
-### 型の内部構造を隠蔽できるかどうか
+##### 型の内部構造を隠蔽できるかどうか
 -->
 
-### Whether the internal structure of the type can be hidden
+##### Whether the internal structure of the type can be hidden
 
 <!--
 型の名前とコンストラクタ関数のみを公開すればよいため，型の内部構造は隠蔽できます．
@@ -469,10 +469,10 @@ It should also be relatively small, although it will be a bit larger if it does 
 You can hide the internal structure of a type because you only need to expose the type name and constructor functions.
 
 <!--
-### 不正な値の生成を防ぐことができるかどうか
+##### 不正な値の生成を防ぐことができるかどうか
 -->
 
-### Whether the generation of illegal values can be prevented
+##### Whether the generation of illegal values can be prevented
 
 <!--
 上記の例のように，受け取った引数を精査することで，不正な値が生成されようとしたときに`Nothing`などを返すことが出来ます．
