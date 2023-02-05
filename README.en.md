@@ -729,6 +729,18 @@ testLarnneire =
 Depending on the number of functions, it may become considerably bigger than defining a smart constructor.
 
 <!--
+##### 値を構築するためのコードの量
+-->
+
+### The amount of code to construct a value
+
+<!--
+こちらも使用する関数の数によりますが，やはり単にコンストラクタ関数を呼び出すよりも量が多くなります．
+-->
+
+This also depends on the number of functions used, but again, the amount is greater than simply calling a constructor function.
+
+<!--
 ##### 型の内部構造を隠蔽できるかどうか
 -->
 
